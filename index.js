@@ -2,9 +2,11 @@ var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var bodyParser = require('body-parser');
+var io = require('socket.io')(server);
 
 // express setup
 console.log('server running on port 3000');
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 server.listen('3000');
 
@@ -25,3 +27,8 @@ app.post('/new-text-message', function(req, res){
 	res.send('<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response><Message>' + message + '</Message></Response>');
 });
 
+
+app.get('/new-calendar-item', function(req, res){
+  io.sockets.emit('new-calendar-item', req.query);
+  res.send(req.query);
+});
