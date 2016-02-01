@@ -3,12 +3,21 @@ var app = express();
 var server = require('http').createServer(app);
 var bodyParser = require('body-parser');
 var io = require('socket.io')(server);
+var config = require('./config')();
+var routes = require('./lib/routes');
+
 
 // express setup
 console.log('server running on port 3000');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 server.listen('3000');
+
+
+// auth
+app.get('/auth', routes.auth);
+app.get('/auth-callback', routes.authCallback);
+
 
 app.post('/new-text-message', function(req, res){
 	var userInput = req.body.Body.toLowerCase();
