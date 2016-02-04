@@ -18,6 +18,9 @@ server.listen('3000');
 app.get('/auth', routes.auth);
 app.get('/auth-callback', routes.authCallback);
 
+// external services
+app.post('/new-email', routes.newEmail);
+
 
 app.post('/new-text-message', function(req, res){
 	var userInput = req.body.Body.toLowerCase();
