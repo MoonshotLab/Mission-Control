@@ -30,6 +30,9 @@ db.connect()
 app.get('/auth', routes.auth);
 app.get('/auth-callback', routes.authCallback);
 
+// api
+app.get('/events', routes.events);
+
 // external services
 app.post('/new-email', routes.newEmail);
 app.post('/calendar-update', routes.calendarUpdate);
