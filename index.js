@@ -5,6 +5,9 @@ var bodyParser = require('body-parser');
 var io = require('socket.io')(server);
 var config = require('./config')();
 var routes = require('./lib/routes');
+var db = require('./lib/db');
+var google = require('./lib/google');
+var utils = require('./lib/utils');
 
 
 // express setup
@@ -14,13 +17,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 server.listen('3000');
 
 
+// retrieve the settings and init
+db.connect()
+	.then(db.getSettings)
+	.then(google.initCalendarSyncWithSettings)
+	.then(db.saveSettings)
+	.catch(utils.handleError);
+
+
+
 // auth
 app.get('/auth', routes.auth);
 app.get('/auth-callback', routes.authCallback);
 
 // external services
 app.post('/new-email', routes.newEmail);
-
+app.post('/calendar-update', routes.calendarUpdate);
 
 app.post('/new-text-message', function(req, res){
 	var userInput = req.body.Body.toLowerCase();
