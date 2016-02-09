@@ -32,6 +32,7 @@ app.get('/auth-callback', routes.authCallback);
 
 // api
 app.get('/events', routes.events);
+app.get('/gratitudes', routes.gratitudes);
 
 // external services
 app.post('/new-email', routes.newEmail);
