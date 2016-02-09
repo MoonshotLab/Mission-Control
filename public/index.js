@@ -1,9 +1,15 @@
-var socket = io();
-socket.on('new-calendar-item', function(data){
+$(function(){
+  $.ajax({
+    url : '/gratitudes'
+  }).done(function(gratitudes){
 
-  $('h1').text(data.title);
-  $('h2').text(data.date);
-  $('p').text(data.description);
+    var template = _.template(
+      $('script#template-gratitude').html()
+    );
+
+    gratitudes.forEach(function(gratitude){
+      $('body').append(template(gratitude));
+    });
+
+  });
 });
-
-

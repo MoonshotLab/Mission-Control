@@ -1,0 +1,18 @@
+body{
+  background-color: rgba(200, 0, 0, 1);
+  color: white;
+  font-family: Helvetica;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.gratitude{
+  height: 100%;
+  width: 75%;
+  margin: auto;
+}
+.gratitude .content{
+  padding-top: 25%;
+}
