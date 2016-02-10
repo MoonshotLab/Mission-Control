@@ -36,8 +36,11 @@ app.get('/auth', routes.auth);
 app.get('/auth-callback', routes.authCallback);
 
 // api
-app.get('/events', routes.events);
-app.get('/gratitudes', routes.gratitudes);
+app.get('/api/events', routes.events);
+app.get('/api/gratitudes', routes.gratitudes);
+
+// views
+app.get('/:page', routes.view);
 
 // external services
 app.post('/new-email', routes.newEmail);
