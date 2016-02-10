@@ -24,6 +24,11 @@ db.connect()
 	.then(db.saveSettings)
 	.catch(utils.handleError);
 
+// resubscribe to the calendar once a day
+setInterval(function(){
+	db.getSettings().then(google.initCalendarSyncWithSettings);
+}, 86400);
+
 
 
 // auth
