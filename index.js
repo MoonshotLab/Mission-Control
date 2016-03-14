@@ -2,12 +2,13 @@ var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var bodyParser = require('body-parser');
-var io = require('socket.io')(server);
 var config = require('./config')();
 var routes = require('./lib/routes');
 var db = require('./lib/db');
 var google = require('./lib/google');
 var utils = require('./lib/utils');
+var socket = require('./lib/socket');
+socket.init(server);
 
 
 // express setup
@@ -61,10 +62,4 @@ app.post('/new-text-message', function(req, res){
 	}
 	res.setHeader("Content-Type", "text/xml");
 	res.send('<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response><Message>' + message + '</Message></Response>');
-});
-
-
-app.get('/new-calendar-item', function(req, res){
-  io.sockets.emit('new-calendar-item', req.query);
-  res.send(req.query);
 });
