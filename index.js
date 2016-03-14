@@ -23,6 +23,8 @@ db.connect()
 	.then(db.getSettings)
 	.then(google.initCalendarSyncWithSettings)
 	.then(db.saveSettings)
+	.then(google.getDirectoryUsers)
+	.then(db.upsertUsers)
 	.catch(utils.handleError);
 
 // resubscribe to the calendar once a day
