@@ -41,6 +41,7 @@ app.get('/auth-callback', routes.authCallback);
 // api
 app.get('/api/events', routes.events);
 app.get('/api/gratitudes', routes.gratitudes);
+app.get('/api/user', routes.user);
 
 // views
 app.get('/:page', routes.view);
