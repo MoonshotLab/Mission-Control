@@ -48,7 +48,7 @@ app.get('/api/gratitudes', routes.gratitudes);
 app.get('/api/user', routes.user);
 
 // views
-app.get('/tvml', routes.tvml);
+app.get('/tvml/:type/:id', routes.tvml);
 app.get('/:page', routes.view);
 
 // external services
