@@ -13,6 +13,10 @@ socket.init(server);
 
 // express setup
 console.log('server running on port 3000');
+app.use(function(req, res, next){
+  res.setHeader('Cache-Control', 'no-cache');
+  return next();
+});
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 server.listen('3000');
@@ -44,6 +48,7 @@ app.get('/api/gratitudes', routes.gratitudes);
 app.get('/api/user', routes.user);
 
 // views
+app.get('/tvml', routes.tvml);
 app.get('/:page', routes.view);
 
 // external services
