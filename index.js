@@ -12,7 +12,7 @@ socket.init(server);
 
 
 // express setup
-console.log('server running on port 3000');
+utils.log(1, 'server running on port ' + config.PORT);
 app.use(function(req, res, next){
   res.setHeader('Cache-Control', 'no-cache');
   return next();
@@ -29,7 +29,7 @@ db.connect()
 	.then(db.saveSettings)
 	.then(google.getDirectoryUsers)
 	.then(db.upsertUsers)
-	.catch(utils.handleError);
+	.catch(utils.logError);
 
 // resubscribe to the calendar once a day
 setInterval(function(){
