@@ -54,24 +54,6 @@ app.get('/tvml/:type/:id', routes.tvml);
 app.get('/:page', routes.view);
 
 // external services
-app.post('/new-email', routes.newEmail);
-app.post('/calendar-update', routes.calendarUpdate);
-
-app.post('/new-text-message', function(req, res){
-	var userInput = req.body.Body.toLowerCase();
-	var message;
-
-	if(userInput.indexOf("iot")!= -1){
-		message = "You signed up for Internet of Things!";
-	}
-	if(userInput.indexOf("make")!= -1){
-		message = "You signed up for Make!";
-	}
-	if(userInput.indexOf("3d")!= -1 || userInput.indexOf("3-d")!= -1){
-		message = "You signed up for 3-D printing!";
-	}
-	res.setHeader("Content-Type", "text/xml");
-	res.send('<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response><Message>' + message + '</Message></Response>');
-});
 app.post('/gratitude/new', routes.newGratitude);
+app.post('/rsvp/new', routes.newRsvp);
 app.post('/events/update', routes.updateCalendar);
