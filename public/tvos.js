@@ -22,7 +22,7 @@ App.onLaunch = function(options) {
 
 // listen for socket events
 var socketEvent = function(data){
-  if(data.type == config.playbackType || config.playbackType == 'everything'){
+  if(data.type == config.playbackType || config.playbackType == 'mixed'){
     slides.collection.splice(slides.currentIndex + 1, 0, data);
   }
 };
@@ -38,7 +38,8 @@ var startSlideshow = function(type){
     slides.collection = collection;
 
     if(slides.collection[slides.currentIndex]){
-      changeSlide({ type : type, id : slides.collection[slides.currentIndex]._id });
+      var slide = slides.collection[slides.currentIndex];
+      changeSlide({ type : slide.type, id : slide._id });
     }
 
     slides.playbackInterval = setInterval(function(){
@@ -46,7 +47,8 @@ var startSlideshow = function(type){
       if(!slides.collection[slides.currentIndex])
         slides.currentIndex = 0;
 
-      changeSlide({ type : type, id : slides.collection[slides.currentIndex]._id });
+      var slide = slides.collection[slides.currentIndex];
+      changeSlide({ type : slide.type, id : slide._id });
     }, config.playbackSpeed);
   });
 };
@@ -75,8 +77,9 @@ var changeSlide = function(opts){
       navigationDocument.pushDocument(doc);
 
       doc.getElementById('carousel').addEventListener('select', function(e){
-        config.playbackType = e.target.getAttribute('type');
-        startSlideshow(config.playbackType);
+        var type = e.target.getAttribute('type');
+        config.playbackType = type;
+        startSlideshow(type);
       });
     } else {
       // make sure to first add the new slide
