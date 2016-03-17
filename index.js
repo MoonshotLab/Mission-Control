@@ -73,3 +73,5 @@ app.post('/new-text-message', function(req, res){
 	res.setHeader("Content-Type", "text/xml");
 	res.send('<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response><Message>' + message + '</Message></Response>');
 });
+app.post('/gratitude/new', routes.newGratitude);
+app.post('/events/update', routes.updateCalendar);
