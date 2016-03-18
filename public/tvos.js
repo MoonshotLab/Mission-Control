@@ -23,7 +23,16 @@ App.onLaunch = function(options) {
 // listen for socket events
 var socketEvent = function(data){
   if(data.type == config.playbackType || config.playbackType == 'mixed'){
-    slides.collection.splice(slides.currentIndex + 1, 0, data);
+    // if the id already exists, then it's an update.
+    // Ignore because it will auto update on fetch
+    // otherwise, show the update immediately
+    var exists = false;
+    slides.collection.forEach(function(item){
+      if(item._id == data._id) exists = true;
+    });
+
+    if(!exists)
+      slides.collection.splice(slides.currentIndex + 1, 0, data);
   }
 };
 
