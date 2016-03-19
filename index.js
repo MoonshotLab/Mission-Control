@@ -21,7 +21,7 @@ app.use(function(req, res, next){
 app.use(session({secret : config.SESSION_SECRET }));
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
-server.listen('3000');
+server.listen(config.PORT);
 
 
 // retrieve the settings and init
