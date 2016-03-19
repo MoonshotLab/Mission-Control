@@ -1,5 +1,5 @@
 var config = {
-  ROOT_URL          : 'https://thawing-bayou-19855.herokuapp.com',
+  ROOT_URL          : null,
   playbackType      : null,
   playbackSpeed     : 10000
 };
@@ -14,7 +14,8 @@ var slides = {
 
 
 // load the default template on launch
-App.onLaunch = function(options) {
+App.onLaunch = function(options){
+  config.ROOT_URL = options.BASEURL;
   changeSlide({ type : 'navigation' });
 };
 
