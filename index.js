@@ -8,6 +8,7 @@ var db = require('./lib/db');
 var google = require('./lib/google');
 var utils = require('./lib/utils');
 var socket = require('./lib/socket');
+var session = require('express-session');
 socket.init(server);
 
 
@@ -17,6 +18,7 @@ app.use(function(req, res, next){
   res.setHeader('Cache-Control', 'no-cache');
   return next();
 });
+app.use(session({secret : config.SESSION_SECRET }));
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 server.listen('3000');

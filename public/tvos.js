@@ -20,6 +20,7 @@ App.onLaunch = function(options) {
 
 
 
+
 // listen for socket events
 var socketEvent = function(data){
   if(data.type == config.playbackType || config.playbackType == 'mixed'){
@@ -39,10 +40,10 @@ var socketEvent = function(data){
 
 
 // start the slideshow
-var startSlideshow = function(type){
+var startSlideshow = function(){
   if(slides.playbackInterval) clearInterval(slides.playbackInterval);
 
-  var url = config.ROOT_URL + '/api/' + type;
+  var url = config.ROOT_URL + '/api/' + config.playbackType;
   fetchCollection(url, function(collection){
     slides.collection = collection;
 
@@ -88,7 +89,7 @@ var changeSlide = function(opts){
       doc.getElementById('carousel').addEventListener('select', function(e){
         var type = e.target.getAttribute('type');
         config.playbackType = type;
-        startSlideshow(type);
+        startSlideshow();
       });
     } else {
       // make sure to first add the new slide
@@ -132,3 +133,9 @@ var fetchCollection = function(url, next){
   request.open('GET', url, true);
   request.send();
 };
+
+
+
+// restart the slideshow once an hour to ensure we're not
+// display events which occured in the past
+setInterval(startSlideshow, 3600000);
