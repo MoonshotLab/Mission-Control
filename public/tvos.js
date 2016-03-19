@@ -138,4 +138,7 @@ var fetchCollection = function(url, next){
 
 // restart the slideshow once an hour to ensure we're not
 // display events which occured in the past
-setInterval(startSlideshow, 3600000);
+setInterval(function(){
+  if(slides.playbackInterval) clearInterval(slides.playbackInterval);
+  startSlideshow();
+}, 3600000);
