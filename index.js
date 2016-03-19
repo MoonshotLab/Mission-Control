@@ -20,6 +20,7 @@ app.use(function(req, res, next){
 });
 app.use(session({secret : config.SESSION_SECRET }));
 app.use(express.static('public'));
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 server.listen(config.PORT);
 
