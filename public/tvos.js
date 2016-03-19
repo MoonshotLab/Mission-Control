@@ -1,5 +1,5 @@
 var config = {
-  ROOT_URL          : 'http://localhost:3000',
+  ROOT_URL          : 'https://thawing-bayou-19855.herokuapp.com',
   playbackType      : null,
   playbackSpeed     : 10000
 };
