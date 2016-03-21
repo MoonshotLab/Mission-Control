@@ -1,7 +1,7 @@
 var config = {
   ROOT_URL          : null,
   playbackType      : null,
-  playbackSpeed     : 10000
+  playbackSpeed     : 15000
 };
 
 var slides = {

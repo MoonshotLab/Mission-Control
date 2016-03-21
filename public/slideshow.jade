@@ -18,7 +18,7 @@ html
           h3 Select Playback Mode
           ul
             li
-              a(data-type='events', href='#') RocketU
+              a(data-type='events', href='#') Calendar
             li
               a(data-type='gratitudes', href='#') Gratitudes
             li
@@ -46,14 +46,14 @@ html
       |     <li>
       |       <%= moment(start.dateTime).format('h:mm') %>-<%= moment(end.dateTime).format('h:mm a') %> | <%= location %>
       |     </li>
-      |     <% if(rsvpcode){ %>
+      |     <% if(typeof rsvpcode !== 'undefined'){ %>
       |     <li>
       |       RSVP: Text <%= rsvpcode %> to <%= config.PHONE_NUMBER %>
       |     </li>
       |     <% } %>
       |   </ul>
       |   <p class='description'><%= description %></p>
-      |   <% if(maxattendees){ %>
+      |   <% if(typeof maxattendees !== 'undefined'){ %>
       |   <p class='max-attendees'><%= maxattendees - attendees.length %> Spots Left</p>
       |   <% } %>
       | </div>
