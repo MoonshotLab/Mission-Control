@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
+var path = require('path');
 var bodyParser = require('body-parser');
 var config = require('./config')();
 var routes = require('./lib/routes');
@@ -22,6 +23,8 @@ app.use(session({secret : config.SESSION_SECRET }));
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.set('views', path.join(__dirname, 'public'));
+app.set('view engine', 'jade');
 server.listen(config.PORT);
 
 
@@ -50,13 +53,13 @@ app.get('/api/events', routes.events);
 app.get('/api/gratitudes', routes.gratitudes);
 app.get('/api/mixed', routes.mixed);
 app.get('/api/user', routes.user);
-app.get('/api/event/:id', routes.event);
-app.get('/api/gratitude/:id', routes.gratitude);
+app.get('/api/events/:id', routes.event);
+app.get('/api/gratitudes/:id', routes.gratitude);
 
 // views
 app.get('/tvml/:type', routes.tvml);
 app.get('/tvml/:type/:id', routes.tvml);
-app.get('/:page', routes.view);
+app.get('/', routes.slideshow);
 
 // external services
 app.post('/gratitude/new', routes.newGratitude);

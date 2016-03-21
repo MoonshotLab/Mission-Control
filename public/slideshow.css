@@ -1,0 +1,112 @@
+body{
+  background-color: black;
+  color: white;
+  font-family: Helvetica;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'GT Walsheim';
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+
+.sixteen-nine {
+  position: relative;
+}
+.sixteen-nine:before {
+  display: block;
+  content: "";
+  width: 100%;
+  padding-top: 56.25%;
+}
+.sixteen-nine > .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+
+
+#navigation{
+  position: relative;
+  z-index: 2;
+  padding-left: 50px;
+}
+#navigation.hide{
+  opacity: 0;
+}
+#navigation a{
+  color: white;
+  padding-bottom: 10px;
+  display: block;
+}
+
+
+
+.slide{
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: .5s linear opacity;
+  opacity: 0;
+  background-size: contain;
+}
+
+.slide.show{
+  opacity: 1;
+}
+
+
+.slide-content{
+  padding-left: 10vw;
+  padding-right: 10vw;
+}
+
+h2{
+  margin: 0;
+  font-size: 2.25vw;
+  padding-top: 5.25vw;
+}
+
+h3{
+  font-size: 5vw;
+  padding-top: 4vw;
+  margin: 0;
+}
+
+ul{
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  font-size: 2.5vw;
+  padding-top: 2vw;
+  line-height: 3.5vw;
+}
+.event p{
+  margin: 0;
+  font-size: 1.5vw;
+  padding-top: 2vw;
+  line-height: 2.25vw;
+}
+.event p.max-attendees{
+  font-size: 2.5vw;
+  position: absolute;
+  bottom: 5.5vw;
+  right: 10vw;
+}
+.gratitude p{
+  font-size: 2.5vw;
+  position: absolute;
+  bottom: 2.5vw;
+  right: 10vw;
+}
+.gratitude h3{
+  font-size: 4vw;
+}

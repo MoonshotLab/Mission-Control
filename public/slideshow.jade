@@ -1,0 +1,59 @@
+doctype html
+html
+  head
+    link(rel='stylesheet', href='/slideshow.css')
+    script(src='/socket.io/socket.io.js')
+    script(src='https://code.jquery.com/jquery-2.2.0.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js')
+    script var config = !{JSON.stringify(config)}
+    script(src='/slideshow.js')
+    
+  body
+    
+    .sixteen-nine
+      .content
+
+        #navigation
+          h3 Select Playback Mode
+          ul
+            li
+              a(data-type='events', href='#') RocketU
+            li
+              a(data-type='gratitudes', href='#') Gratitudes
+            li
+              a(data-type='mixed', href='#') Mixed
+
+        #slides
+          .slide.slide-1
+          .slide.slide-2
+
+
+    script(type='text/template', id='template-gratitudes')
+      | <div class='slide-content gratitude'>
+      |   <h2>Gratitudes</h2>
+      |   <h3><%= body %></h3>
+      |   <p><%= from.name %></p>
+      | </div>
+    
+
+    script(type='text/template', id='template-events')
+      | <div class='slide-content event'>
+      |   <h2>RocketU</h2>
+      |   <h3><%= summary %></h3>
+      |   <ul class='details'>
+      |     <li><%= moment(start.dateTime).format('dddd, MMMM Do') %></li>
+      |     <li>
+      |       <%= moment(start.dateTime).format('h:mm') %>-<%= moment(end.dateTime).format('h:mm a') %> | <%= location %>
+      |     </li>
+      |     <% if(rsvpcode){ %>
+      |     <li>
+      |       RSVP: Text <%= rsvpcode %> to <%= config.PHONE_NUMBER %>
+      |     </li>
+      |     <% } %>
+      |   </ul>
+      |   <p class='description'><%= description %></p>
+      |   <% if(maxattendees){ %>
+      |   <p class='max-attendees'><%= maxattendees - attendees.length %> Spots Left</p>
+      |   <% } %>
+      | </div>
