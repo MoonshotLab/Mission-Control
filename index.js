@@ -22,6 +22,8 @@ app.use(function(req, res, next){
 });
 app.use(session({
   secret : config.SESSION_SECRET,
+  resave : false,
+  saveUninitialized : false,
   store  : new MongoSession({
      uri        : config.DB_CONNECT,
      collection : 'sessions'
