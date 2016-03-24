@@ -65,3 +65,4 @@ app.get('/', routes.slideshow);
 app.post('/gratitude/new', routes.newGratitude);
 app.post('/rsvp/new', routes.newRsvp);
 app.post('/events/update', routes.updateCalendar);
+app.post('/voice', routes.voiceResponse);
