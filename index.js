@@ -10,6 +10,7 @@ var google = require('./lib/google');
 var utils = require('./lib/utils');
 var socket = require('./lib/socket');
 var session = require('express-session');
+var MongoSession = require('connect-mongodb-session')(session);
 socket.init(server);
 
 
@@ -19,7 +20,13 @@ app.use(function(req, res, next){
   res.setHeader('Cache-Control', 'no-cache');
   return next();
 });
-app.use(session({secret : config.SESSION_SECRET }));
+app.use(session({
+  secret : config.SESSION_SECRET,
+  store  : new MongoSession({
+     uri        : config.DB_CONNECT,
+     collection : 'sessions'
+  })
+}));
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
