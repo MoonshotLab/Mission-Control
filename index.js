@@ -72,6 +72,7 @@ app.get('/', routes.slideshow);
 
 // external services
 app.post('/gratitude/new', routes.newGratitude);
+app.post('/gratitude/error', routes.gratitudeError);
 app.post('/rsvp/new', routes.newRsvp);
 app.post('/events/update', routes.updateCalendar);
 app.post('/voice', routes.voiceResponse);
