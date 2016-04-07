@@ -39,16 +39,16 @@ server.listen(config.PORT);
 
 // retrieve the settings and init
 db.connect()
-	.then(db.getSettings)
-	.then(google.initCalendarSyncWithSettings)
-	.then(db.saveSettings)
-	.then(google.getDirectoryUsers)
-	.then(db.upsertUsers)
-	.catch(utils.logError);
+  .then(db.getSettings)
+  .then(google.initCalendarSyncWithSettings)
+  .then(db.saveSettings)
+  .then(google.getDirectoryUsers)
+  .then(db.upsertUsers)
+  .catch(utils.logError);
 
 // resubscribe to the calendar once a day
 setInterval(function(){
-	db.getSettings().then(google.initCalendarSyncWithSettings);
+  db.getSettings().then(google.initCalendarSyncWithSettings);
 }, 86400000);
 
 
