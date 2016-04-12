@@ -72,6 +72,7 @@ app.get('/auth-callback', routes.authCallback);
 app.get('/api/events', routes.events);
 app.get('/api/gratitudes', routes.gratitudes);
 app.get('/api/birthdays', routes.birthdays);
+app.get('/api/anniversaries', routes.anniversaries);
 app.get('/api/mixed', routes.mixed);
 app.get('/api/events/:id', routes.event);
 app.get('/api/gratitudes/:id', routes.gratitude);
