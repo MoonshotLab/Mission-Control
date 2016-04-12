@@ -9,6 +9,7 @@ var db = require('./lib/db');
 var google = require('./lib/google');
 var utils = require('./lib/utils');
 var socket = require('./lib/socket');
+var junkdrawer = require('./lib/junkdrawer');
 var session = require('express-session');
 var MongoSession = require('connect-mongodb-session')(session);
 socket.init(server);
@@ -44,11 +45,21 @@ db.connect()
   .then(db.saveSettings)
   .then(google.getDirectoryUsers)
   .then(db.upsertUsers)
+  .then(junkdrawer.attachAnniversariesToUsers)
+  .then(junkdrawer.attachBirthdaysToUsers)
   .catch(utils.logError);
 
-// resubscribe to the calendar once a day
+
+
 setInterval(function(){
+  // resubscribe to the calendar once a day
   db.getSettings().then(google.initCalendarSyncWithSettings);
+
+  // update users once a day
+  google.getDirectoryUsers()
+    .then(db.upsertUsers)
+    .then(junkdrawer.attachAnniversariesToUsers)
+    .then(junkdrawer.attachBirthdaysToUsers);
 }, 86400000);
 
 
