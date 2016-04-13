@@ -1,18 +1,23 @@
-var express = require('express');
-var app = express();
-var server = require('http').createServer(app);
-var path = require('path');
-var bodyParser = require('body-parser');
-var config = require('./config')();
-var routes = require('./lib/routes');
-var db = require('./lib/db');
-var google = require('./lib/google');
-var utils = require('./lib/utils');
+var express       = require('express');
+var app           = express();
+var server        = require('http').createServer(app);
+var path          = require('path');
+var bodyParser    = require('body-parser');
+var config        = require('./config')();
+var routes        = require('./lib/routes');
+var utils         = require('./lib/utils');
+var session       = require('express-session');
+var MongoSession  = require('connect-mongodb-session')(session);
+
+
+// initialize socket
 var socket = require('./lib/socket');
-var junkdrawer = require('./lib/junkdrawer');
-var session = require('express-session');
-var MongoSession = require('connect-mongodb-session')(session);
 socket.init(server);
+
+
+// connect to the db and run the background tasks
+var jobs = require('./lib/jobs');
+jobs.run();
 
 
 // express setup
@@ -36,31 +41,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('views', path.join(__dirname, 'public'));
 app.set('view engine', 'jade');
 server.listen(config.PORT);
-
-
-// retrieve the settings and init
-db.connect()
-  .then(db.getSettings)
-  .then(google.initCalendarSyncWithSettings)
-  .then(db.saveSettings)
-  .then(google.getDirectoryUsers)
-  .then(db.upsertUsers)
-  .then(junkdrawer.attachAnniversariesToUsers)
-  .then(junkdrawer.attachBirthdaysToUsers)
-  .catch(utils.logError);
-
-
-
-setInterval(function(){
-  // resubscribe to the calendar once a day
-  db.getSettings().then(google.initCalendarSyncWithSettings);
-
-  // update users once a day
-  google.getDirectoryUsers()
-    .then(db.upsertUsers)
-    .then(junkdrawer.attachAnniversariesToUsers)
-    .then(junkdrawer.attachBirthdaysToUsers);
-}, 86400000);
 
 
 
