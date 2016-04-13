@@ -76,7 +76,7 @@ app.get('/api/anniversaries', routes.anniversaries);
 app.get('/api/mixed', routes.mixed);
 app.get('/api/events/:id', routes.event);
 app.get('/api/gratitudes/:id', routes.gratitude);
-app.get('/api/user', routes.user);
+app.get('/api/users', routes.users);
 
 // views
 app.get('/tvml/:type', routes.tvml);
