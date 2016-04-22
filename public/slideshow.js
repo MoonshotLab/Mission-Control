@@ -1,5 +1,5 @@
 config.playbackType  = null;
-config.playbackSpeed = 15000;
+config.playbackSpeed = 10000;
 
 
 var slides = {
