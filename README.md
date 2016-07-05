@@ -68,3 +68,5 @@ The following environment variables need to be set.
 * `ROOT_URL` : The web hook root url to use for both the e-mail and calendar hooks.
 * `DB_CONNECT` : A mongo connection string
 * `MODE` : development or production
+* `CONTEXTIO_KEY` : context.io key
+* `CONTEXTIO_SECRET` : context.io secret
